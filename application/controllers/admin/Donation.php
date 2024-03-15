@@ -423,8 +423,13 @@ class Donation extends MY_Controller {
     
             $totalFilteredAmount += $amount;
         }
-        
-        $limit = $_POST['length'].",".$_POST['start'];
+        // $limit = $_POST['length'].",".$_POST['start'];        
+        if ($_POST['length'] != -1) {
+            $limit = $_POST['length'] . "," . $_POST['start'];
+        } else {
+            $limit = "";
+        }
+
         $list = $this->model_customer->getData("app_donation", "app_donation.*,app_donation_category.title,concat(app_admin.first_name,' ',app_admin.last_name) as collected_by,app_accounts.name as account_name", $condition, $dep_join, $order, '', '', $limit);
 		$data = array();
 		$no = $_POST['start'];

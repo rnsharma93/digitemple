@@ -216,7 +216,12 @@ class Staff extends MY_Controller {
 
         $total_donate = " (select sum(amount) from app_donation where donator_id=app_admin.id ) as total_donate ";
         $year_donate = " (select sum(amount) from app_donation where donator_id=app_admin.id and YEAR(created_on)=".date('Y')." ) as year_donate ";
-        $limit = $_POST['length'].",".$_POST['start'];
+        // $limit = $_POST['length'].",".$_POST['start'];        
+        if ($_POST['length'] != -1) {
+            $limit = $_POST['length'] . "," . $_POST['start'];
+        } else {
+            $limit = "";
+        }
         $list = $this->model_admin->getData("app_admin", "*,$total_donate,$year_donate", $condition, "", $order, '', '', $limit);
 		$data = array();
 		$no = $_POST['start'];

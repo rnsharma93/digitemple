@@ -469,8 +469,14 @@ class Expense extends MY_Controller {
     
             $totalFilteredAmount += $amount;
         }
+        
+        // $limit = $_POST['length'].",".$_POST['start'];
+        if ($_POST['length'] != -1) {
+            $limit = $_POST['length'] . "," . $_POST['start'];
+        } else {
+            $limit = "";
+        }
 
-        $limit = $_POST['length'].",".$_POST['start'];
         $list = $this->model_admin->getData("app_expense", "app_expense.*,app_expense_category.title as category_title,concat(app_admin.first_name,' ',app_admin.last_name) as created_by_name,app_accounts.name as account_name",$condition, $exp_join, $order, '', '', $limit);
 		$data = array();
 		$no = $_POST['start'];
