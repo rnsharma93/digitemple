@@ -10,6 +10,7 @@ include VIEWPATH . 'admin/header.php';
                 <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url('admin/staff'); ?>"><?php echo dt_translate('manage') . " " . dt_translate('staff') ?></a></li>
             </ol>
             <div class="ml-auto">
+            <a href="<?php echo base_url('admin/staff-export'); ?>" class="btn btn-warning btn-icon btn-sm text-white mr-2"> <span> <i class="fa fa-file-excel-o"></i></span> <?php echo dt_translate('export'); ?></a>
                 <a href="<?php echo base_url('admin/add-staff'); ?>" class="btn btn-primary btn-icon btn-sm text-white mr-2"> <span> <i class="fa fa-plus"></i> </span> <?php echo dt_translate('add') . " " . dt_translate('staff'); ?> </a>
             </div>
         </div>

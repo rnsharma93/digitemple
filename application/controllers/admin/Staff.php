@@ -260,4 +260,70 @@ class Staff extends MY_Controller {
 		echo json_encode($output);
 	}
 
+    // export staff in CSV format
+    public function staff_export(){
+        //$admin_id = $this->session->userdata("ADMIN_ID");
+        $order = "amount DESC";
+        $total_donate = " (select sum(amount) from app_donation where donator_id=app_admin.id ) as total_donate ";
+        $year_donate = " (select sum(amount) from app_donation where donator_id=app_admin.id and YEAR(created_on)=".date('Y')." ) as year_donate ";
+        $admins = $this->model_admin->getData("app_admin", "*,$total_donate,$year_donate", "", "", $order);
+        
+
+        if(isset($admins) && count($admins)){
+            $filename="staff".date('Y_m_d').".csv";
+            $delimiter = ",";
+
+            //create a file pointer
+            $f = fopen('php://memory', 'w');
+
+            //set column headers
+
+            $fields = array(
+                '#',
+                'ref_no',
+                dt_translate('first_name'),
+                dt_translate('last_name'),
+                dt_translate('phone'),
+                dt_translate('city'),
+                dt_translate('amount'),
+                dt_translate('total_donate'),
+                date("Y")." ".dt_translate('donate'),
+                dt_translate('due_amount'),
+            );
+
+            fputcsv($f, $fields, $delimiter);
+
+            //output each row of the data, format line as csv and write to file pointer
+            foreach ($admins as $key => $admin){
+                $due_amount = ($admin['amount'] - $admin['total_donate']);
+                $lineData = array(
+                    ++$key,
+                    $admin['ref_no'],
+                    $admin['first_name'],
+                    $admin['last_name'],
+                    $admin['phone'],
+                    $admin['city'],
+                    number_format($admin['amount'],2),
+                    number_format($admin['total_donate']),
+                    number_format($admin['year_donate']),
+                    number_format($due_amount,2)
+                );
+
+                fputcsv($f, $lineData, $delimiter);
+            }
+
+            //move back to beginning of file
+            fseek($f, 0);
+
+            //set headers to download file rather than displayed
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+            //output all remaining data on a file pointer
+            fpassthru($f);
+        }else{
+            redirect('admin/staff');
+        }
+    }  
+
 }

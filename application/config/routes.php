@@ -102,6 +102,7 @@ $route['admin/add-staff'] = 'admin/staff/add_staff';
 $route['admin/update-staff/(:num)'] = 'admin/staff/update_staff/$1';
 $route['admin/save-staff'] = 'admin/staff/save_staff';
 $route['admin/delete-staff/(:num)'] = 'admin/staff/delete_staff/$1';
+$route['admin/staff-export'] = 'admin/staff/staff_export';
 
 // Department
 $route['admin/donation-category'] = 'admin/donation_category/index';
