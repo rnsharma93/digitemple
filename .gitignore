@@ -1,0 +1,4 @@
+# Ignore application logs directory
+/application/logs/
+digicamp_temple.sql
+environment.php
