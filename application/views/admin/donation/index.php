@@ -168,7 +168,6 @@ include VIEWPATH . 'admin/footer.php';
         "processing": true,
         "serverSide": true,
         "searching": true,
-        "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
         "order": [],
         "searchDelay": 1000,
         
