@@ -27,12 +27,13 @@ class Report extends MY_Controller {
         $type=$this->input->get('type');
 
         if(isset($Save) && $Save=='Save'){
+            
             if(isset($from_date) && $from_date!="" && isset($to_date) && $to_date!=""){
-                $condition="DATE(app_donation.created_on) BETWEEN '".$from_date."' AND '".$to_date."'";
+                $condition="DATE(app_donation.date) BETWEEN '".$from_date."' AND '".$to_date."'";
             }else if (isset($from_date) && $from_date!=""){
-                $condition="DATE(app_donation.created_on)>='".$from_date."'";
+                $condition="DATE(app_donation.date)>='".$from_date."'";
             }else if(isset($to_date) && $to_date!=""){
-                $condition="DATE(app_donation.created_on)>='".$to_date."'";
+                $condition="DATE(app_donation.date)>='".$to_date."'";
             }
 
 

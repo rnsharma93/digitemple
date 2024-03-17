@@ -125,7 +125,7 @@ $save=$this->input->get('Save');
                                                 <td><?php echo $val['title']; ?></td>
                                                 <td><?php echo $payment_type; ?></td>
                                                 <td><?php echo dt_price_format($val['amount']); ?></td>
-                                                <td><?php echo get_formated_date($val['created_on']); ?></td>
+                                                <td><?php echo get_formated_date($val['date']); ?></td>
                                             </tr>
                                             <?php
                                             $total_amount=$total_amount+$val['amount'];
