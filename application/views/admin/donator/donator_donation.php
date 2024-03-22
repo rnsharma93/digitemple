@@ -42,7 +42,7 @@ include VIEWPATH . 'admin/header.php';
                                             <td><?php echo $payment_type; ?></td>
                                             <td><?php echo $val["collected_by"];?></td>
                                             <td><?php echo dt_price_format($val['amount']); ?></td>
-                                            <td><?php echo date('d-m-Y',strtotime($val['created_on'])); ?></td>
+                                            <td><?php echo date('d-m-Y',strtotime($val['date'])); ?></td>
                                         </tr>
                                         <?php $display_count++; endforeach; ?>
                                 <?php else: ?>

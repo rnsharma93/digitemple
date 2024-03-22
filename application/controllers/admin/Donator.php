@@ -164,7 +164,6 @@ class Donator extends MY_Controller {
 
         $data['app_cause_donation'] = $this->model_customer->getData("app_cause_donation", "*",$condition,"","id desc");
 
-
         $this->load->view('admin/donator/donator_donation', $data);
     }
 
