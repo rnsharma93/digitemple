@@ -271,7 +271,7 @@ class Expense extends MY_Controller {
 
     public function expense_export(){
         $admin_id = $this->session->userdata("ADMIN_ID");
-        $order = "app_expense.created_on DESC";
+        $order = "app_expense.expense_date DESC";
         $exp_join = array(
             array(
                 'table' => 'app_expense_category',
@@ -299,6 +299,8 @@ class Expense extends MY_Controller {
             $fields = array(
                 '#',
                 dt_translate('expense_category'),
+                dt_translate('party_name'),
+                dt_translate('party_phone'),
                 dt_translate('amount'),
                 dt_translate('details'),
                 dt_translate('date')
@@ -307,11 +309,13 @@ class Expense extends MY_Controller {
             fputcsv($f, $fields, $delimiter);
 
             //output each row of the data, format line as csv and write to file pointer
-            foreach ($expense as $expense_data){
+            foreach ($expense as $key => $expense_data){
 
                 $lineData = array(
-                    $expense_data['id'],
+                    $key+1,
                     $expense_data['category_title'],
+                    $expense_data['party_name'],
+                    $expense_data['party_phone'],
                     number_format($expense_data['amount'],2),
                     $expense_data['details'],
                     get_formated_date($expense_data['expense_date'],"N")

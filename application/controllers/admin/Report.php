@@ -67,7 +67,7 @@ class Report extends MY_Controller {
         $Save=$this->input->get('Save');
         $category=$this->input->get('category');
 
-        $order = "app_expense.expense_date ASC";
+        $order = "app_expense.expense_date DESC";
 
         if(isset($Save) && $Save=='Save'){
             $condition="";
