@@ -147,6 +147,7 @@ class Report extends MY_Controller {
         $to_date=$this->input->get('to_date');
         $Save=$this->input->get('Save');
         $type=$this->input->get('item');
+        $category_id = $this->input->get('category');
 
         $order = "app_expense.expense_date ASC";
 
@@ -158,6 +159,10 @@ class Report extends MY_Controller {
                 $condition="DATE(app_expense.expense_date)>='".$from_date."'";
             }else if(isset($to_date) && $to_date!=""){
                 $condition="DATE(app_expense.expense_date)>='".$to_date."'";
+            }
+
+            if ($category_id) {
+                $condition.=" AND app_expense.category_id=".$category_id;
             }
 
             $exp_join = array(
