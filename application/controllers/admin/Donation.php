@@ -249,33 +249,29 @@ class Donation extends MY_Controller {
 
             $fields = array(
                 '#',
+                dt_translate('ref_no'),
                 dt_translate('first_name'),
                 dt_translate('last_name'),
-                dt_translate('email'),
                 dt_translate('phone'),
                 dt_translate('city'),
                 dt_translate('amount'),
-                dt_translate('payment_by'),
-                dt_translate('cheque'),
-                dt_translate('department'),
+                dt_translate('date'),
             );
 
             fputcsv($f, $fields, $delimiter);
 
             //output each row of the data, format line as csv and write to file pointer
-            foreach ($app_donation as $donation){
+            foreach ($app_donation as $key => $donation){
 
                 $lineData = array(
-                    $donation['id'],
+                    $key+1,
+                    $donation['ref_no'],
                     $donation['first_name'],
                     $donation['last_name'],
-                    $donation['email'],
                     $donation['phone'],
                     $donation['city'],
                     number_format($donation['amount'],2),
-                    $donation['type'],
-                    $donation['cheque_no'],
-                    $donation['title'],
+                    get_formated_date($donation['date'],"N")
                 );
 
                 fputcsv($f, $lineData, $delimiter);
